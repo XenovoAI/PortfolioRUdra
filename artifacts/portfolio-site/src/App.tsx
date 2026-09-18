@@ -109,20 +109,59 @@ function ProjectArtwork({ tone, id }: { tone: string; id: string }) {
   );
 }
 
+function IntroOverlay({ onFinish }: { onFinish: () => void }) {
+  const [closing, setClosing] = useState(false);
+
+  useEffect(() => {
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const closeDelay = reducedMotion ? 850 : 2450;
+    const closeTimer = window.setTimeout(() => setClosing(true), closeDelay);
+    const finishTimer = window.setTimeout(onFinish, closeDelay + (reducedMotion ? 20 : 700));
+
+    return () => {
+      window.clearTimeout(closeTimer);
+      window.clearTimeout(finishTimer);
+    };
+  }, [onFinish]);
+
+  const skipIntro = () => {
+    setClosing(true);
+    window.setTimeout(onFinish, 700);
+  };
+
+  return (
+    <div className={`intro-overlay ${closing ? 'intro-overlay--closing' : ''}`} role="dialog" aria-label="Patel Rudra portfolio intro" data-testid="intro-overlay">
+      <div className="intro-grid" aria-hidden="true" />
+      <div className="intro-orbit intro-orbit--outer" aria-hidden="true" />
+      <div className="intro-orbit intro-orbit--inner" aria-hidden="true" />
+      <div className="intro-wordmark">
+        <div className="intro-mark">R</div>
+        <p className="intro-name">Patel Rudra<span>.</span></p>
+        <p className="intro-role">Graphic design · ecommerce · GFX</p>
+      </div>
+      <div className="intro-progress" aria-hidden="true"><span /></div>
+      <button type="button" onClick={skipIntro} className="intro-skip" data-testid="button-skip-intro">Skip intro <ArrowUpRight size={14} /></button>
+    </div>
+  );
+}
+
 function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [introVisible, setIntroVisible] = useState(true);
   useReveal();
 
   const closeMenu = () => setMenuOpen(false);
   const copyEmail = async () => {
-    await navigator.clipboard?.writeText('patelrudra.design@example.com');
+    await navigator.clipboard?.writeText('rudraptel8@gmail.com');
     setCopied(true);
     window.setTimeout(() => setCopied(false), 2200);
   };
 
   return (
-    <main className="portfolio-noise min-h-[100dvh] bg-[var(--paper)] text-[var(--ink)]">
+    <>
+      {introVisible && <IntroOverlay onFinish={() => setIntroVisible(false)} />}
+      <main className="portfolio-noise min-h-[100dvh] bg-[var(--paper)] text-[var(--ink)]">
       <header className="fixed left-0 right-0 top-0 z-20 border-b border-[var(--ink)]/10 bg-[var(--paper)]/90 backdrop-blur-md">
         <div className="mx-auto flex h-[76px] max-w-[1240px] items-center justify-between px-5 sm:px-8 lg:px-12">
           <a href="#top" onClick={closeMenu} className="group flex items-center gap-3" data-testid="link-brand">
@@ -133,7 +172,7 @@ function Home() {
             <a href="#work" onClick={closeMenu} className="line-link text-sm text-[var(--ink)]/75 hover:text-[var(--ink)]" data-testid="link-work">Selected work</a>
             <a href="#about" onClick={closeMenu} className="line-link text-sm text-[var(--ink)]/75 hover:text-[var(--ink)]" data-testid="link-about">About</a>
             <a href="#contact" onClick={closeMenu} className="line-link text-sm text-[var(--ink)]/75 hover:text-[var(--ink)]" data-testid="link-contact">Contact</a>
-            <a href="mailto:patelrudra.design@example.com" className="flex items-center gap-2 text-sm font-semibold md:ml-2" data-testid="link-email">Let&apos;s talk <ArrowUpRight size={15} /></a>
+            <a href="mailto:rudraptel8@gmail.com" className="flex items-center gap-2 text-sm font-semibold md:ml-2" data-testid="link-email">Let&apos;s talk <ArrowUpRight size={15} /></a>
           </nav>
           <button type="button" onClick={() => setMenuOpen(!menuOpen)} className="grid h-10 w-10 place-items-center rounded-full border border-[var(--ink)]/20 md:hidden" aria-label={menuOpen ? 'Close menu' : 'Open menu'} data-testid="button-mobile-menu">
             {menuOpen ? <X size={19} /> : <Menu size={19} />}
@@ -239,7 +278,7 @@ function Home() {
 
       <section id="contact" className="mx-auto max-w-[1240px] px-5 py-28 sm:px-8 lg:px-12 lg:py-40">
         <div className="reveal relative overflow-hidden rounded-[2rem] bg-[var(--tomato)] px-7 py-14 sm:px-14 sm:py-20">
-           <div className="relative z-10 max-w-[780px]"><SectionLabel number="05">Let&apos;s connect</SectionLabel><h2 className="mt-7 font-display text-6xl leading-[.88] tracking-[-.06em] sm:text-8xl">Have a project<br /><span className="ml-[.35em]">in mind?</span></h2><p className="mt-8 max-w-[420px] text-base leading-relaxed text-[var(--ink)]/75">Tell me about your ecommerce website, GFX idea, or the next thing you&apos;re learning. I&apos;d love to hear it.</p><div className="mt-9 flex flex-wrap items-center gap-5"><a href="mailto:patelrudra.design@example.com" className="inline-flex items-center gap-3 rounded-full bg-[var(--ink)] px-6 py-3.5 text-sm font-semibold text-[var(--paper)] transition-transform hover:-translate-y-1" data-testid="button-send-email">patelrudra.design@example.com <ArrowUpRight size={17} /></a><button type="button" onClick={copyEmail} className="inline-flex items-center gap-2 text-sm font-semibold" data-testid="button-copy-email">{copied ? <><Check size={16} /> copied</> : <><Mail size={16} /> copy email</>}</button></div></div>
+           <div className="relative z-10 max-w-[780px]"><SectionLabel number="05">Let&apos;s connect</SectionLabel><h2 className="mt-7 font-display text-6xl leading-[.88] tracking-[-.06em] sm:text-8xl">Have a project<br /><span className="ml-[.35em]">in mind?</span></h2><p className="mt-8 max-w-[420px] text-base leading-relaxed text-[var(--ink)]/75">Tell me about your ecommerce website, GFX idea, or the next thing you&apos;re learning. I&apos;d love to hear it.</p><div className="mt-9 flex flex-wrap items-center gap-5"><a href="mailto:rudraptel8@gmail.com" className="inline-flex items-center gap-3 rounded-full bg-[var(--ink)] px-6 py-3.5 text-sm font-semibold text-[var(--paper)] transition-transform hover:-translate-y-1" data-testid="button-send-email">rudraptel8@gmail.com <ArrowUpRight size={17} /></a><button type="button" onClick={copyEmail} className="inline-flex items-center gap-2 text-sm font-semibold" data-testid="button-copy-email">{copied ? <><Check size={16} /> copied</> : <><Mail size={16} /> copy email</>}</button></div></div>
           <div className="absolute -bottom-32 -right-16 h-80 w-80 rounded-full border-[40px] border-[var(--ink)]/10 sm:-right-10 sm:-top-24 sm:bottom-auto sm:h-[440px] sm:w-[440px]" /><div className="absolute bottom-9 right-10 hidden rotate-12 font-display text-8xl text-[var(--ink)]/10 sm:block">hi</div>
         </div>
       </section>
@@ -248,10 +287,11 @@ function Home() {
         <div className="mx-auto flex max-w-[1240px] flex-col gap-8 px-5 py-8 sm:px-8 md:flex-row md:items-center md:justify-between lg:px-12">
            <div className="flex items-center gap-3"><span className="grid h-8 w-8 place-items-center rounded-full bg-[var(--ink)] font-display text-sm text-[var(--paper)]">R</span><span className="text-sm">Patel Rudra<span className="text-[var(--tomato)]">.</span></span></div>
            <p className="font-mono-custom text-[10px] uppercase tracking-[.12em] text-[var(--ink)]/50">Graphic designer · ecommerce & GFX · © 2025</p>
-          <div className="flex items-center gap-4"><a href="https://www.instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram" className="transition-colors hover:text-[var(--tomato)]" data-testid="link-instagram"><Instagram size={17} /></a><a href="https://www.linkedin.com" target="_blank" rel="noreferrer" aria-label="LinkedIn" className="transition-colors hover:text-[var(--tomato)]" data-testid="link-linkedin"><Linkedin size={17} /></a><a href="#top" className="ml-2 grid h-9 w-9 place-items-center rounded-full border border-[var(--ink)]/20 transition-colors hover:bg-[var(--ink)] hover:text-[var(--paper)]" aria-label="Back to top" data-testid="link-back-to-top"><ChevronDown className="rotate-180" size={17} /></a></div>
+          <div className="flex items-center gap-4"><a href="https://www.instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram" className="transition-colors hover:text-[var(--tomato)]" data-testid="link-instagram"><Instagram size={17} /></a><a href="https://www.linkedin.com/in/patel-rudra-5a23222b1?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noreferrer" aria-label="LinkedIn" className="transition-colors hover:text-[var(--tomato)]" data-testid="link-linkedin"><Linkedin size={17} /></a><a href="#top" className="ml-2 grid h-9 w-9 place-items-center rounded-full border border-[var(--ink)]/20 transition-colors hover:bg-[var(--ink)] hover:text-[var(--paper)]" aria-label="Back to top" data-testid="link-back-to-top"><ChevronDown className="rotate-180" size={17} /></a></div>
         </div>
       </footer>
-    </main>
+      </main>
+    </>
   );
 }
 
