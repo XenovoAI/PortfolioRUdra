@@ -262,8 +262,8 @@ function Home() {
         </div>
         <div className="reveal reveal-delay-2 mt-28 grid border-t border-[var(--ink)]/20 pt-8 sm:grid-cols-3">
            <div><p className="eyebrow text-[var(--tomato)]">Experience</p><p className="mt-3 text-sm">Graphic designing<br />Visual communication & GFX</p></div>
+           <div className="mt-8 sm:mt-0"><p className="eyebrow text-[var(--tomato)]">Education</p><p className="mt-3 text-sm">Diploma in Computer Engineering<br />Second year · Parul University</p></div>
            <div className="mt-8 sm:mt-0"><p className="eyebrow text-[var(--tomato)]">Skills</p><p className="mt-3 text-sm">Python · C · C++<br />DSA basics · hardware</p></div>
-           <div className="mt-8 sm:mt-0"><p className="eyebrow text-[var(--tomato)]">Focus</p><p className="mt-3 text-sm">Ecommerce websites<br />Graphic design projects</p></div>
         </div>
       </section>
 
