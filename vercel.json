@@ -1,0 +1,8 @@
+{
+  "buildCommand": "cd artifacts/portfolio-site && pnpm run build",
+  "outputDirectory": "artifacts/portfolio-site/dist/public",
+  "devCommand": "cd artifacts/portfolio-site && pnpm run dev",
+  "installCommand": "pnpm install",
+  "framework": "vite",
+  "regions": ["iad1"]
+}
