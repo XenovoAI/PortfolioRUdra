@@ -286,7 +286,7 @@ function Home() {
       <footer className="border-t border-[var(--ink)]/15">
         <div className="mx-auto flex max-w-[1240px] flex-col gap-8 px-5 py-8 sm:px-8 md:flex-row md:items-center md:justify-between lg:px-12">
            <div className="flex items-center gap-3"><span className="grid h-8 w-8 place-items-center rounded-full bg-[var(--ink)] font-display text-sm text-[var(--paper)]">R</span><span className="text-sm">Patel Rudra<span className="text-[var(--tomato)]">.</span></span></div>
-           <p className="font-mono-custom text-[10px] uppercase tracking-[.12em] text-[var(--ink)]/50">Graphic designer · ecommerce & GFX · © 2025</p>
+           <p className="font-mono-custom text-[10px] uppercase tracking-[.12em] text-[var(--ink)]/50">Graphic designer · ecommerce & GFX</p>
           <div className="flex items-center gap-4"><a href="https://www.instagram.com/r_p_360/" target="_blank" rel="noreferrer" aria-label="Instagram @r_p_360" className="transition-colors hover:text-[var(--tomato)]" data-testid="link-instagram"><Instagram size={17} /></a><a href="https://www.linkedin.com/in/patel-rudra-5a23222b1?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noreferrer" aria-label="LinkedIn" className="transition-colors hover:text-[var(--tomato)]" data-testid="link-linkedin"><Linkedin size={17} /></a><a href="#top" className="ml-2 grid h-9 w-9 place-items-center rounded-full border border-[var(--ink)]/20 transition-colors hover:bg-[var(--ink)] hover:text-[var(--paper)]" aria-label="Back to top" data-testid="link-back-to-top"><ChevronDown className="rotate-180" size={17} /></a></div>
         </div>
       </footer>
