@@ -43,6 +43,7 @@ Thumbs.db
 
 # Vercel
 .vercel
+vercel-output/
 
 # Local development
 .cache/
