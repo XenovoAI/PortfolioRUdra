@@ -1,8 +1,8 @@
 {
-  "buildCommand": "pnpm --filter @workspace/portfolio-site run build",
+  "buildCommand": "cd artifacts/portfolio-site && pnpm run build",
   "outputDirectory": "artifacts/portfolio-site/dist",
   "devCommand": "pnpm --filter @workspace/portfolio-site run dev",
   "installCommand": "pnpm install",
-  "framework": "vite",
+  "framework": null,
   "regions": ["iad1"]
 }
