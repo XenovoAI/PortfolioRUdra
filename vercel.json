@@ -1,5 +1,7 @@
 {
-  "github": {
-    "silent": true
-  }
+  "buildCommand": "pnpm install && pnpm --filter @workspace/portfolio-site run build",
+  "outputDirectory": "artifacts/portfolio-site/dist",
+  "framework": "vite",
+  "installCommand": "echo 'Dependencies installed by buildCommand'",
+  "regions": ["iad1"]
 }
