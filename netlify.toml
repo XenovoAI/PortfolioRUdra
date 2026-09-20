@@ -1,0 +1,8 @@
+[build]
+  command = "pnpm --filter @workspace/portfolio-site build"
+  publish = "artifacts/portfolio-site/dist"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
